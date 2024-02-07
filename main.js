@@ -1,24 +1,22 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+import * as ex from "excalibur";
+import { VIEWPORT_HEIGHT, VIEWPORT_WIDTH, SCALE} from "./constants";
+import {Player} from "./src/actors/Players/Player.js";
+// import {Floor} from "./src/actors/Floor.js";
+// import {loader} from "./resources.js";
+// import {Map_Indoor} from "./src/maps/Map_Indoor.js";
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+const game = new ex.Engine({
+  width: VIEWPORT_WIDTH * SCALE,
+  height: VIEWPORT_HEIGHT * SCALE,
+  fixedUpdateFps: 60,
+  antialiasing: false, // Pixel Art boi
+});
 
-setupCounter(document.querySelector('#counter'))
+const player = new Player(200, 200, "RED");
+game.add(player);
+
+// const floor = new Floor(1, 1, 1, 6);
+// game.add(floor);
+
+// game.start(loader);
+game.start();
